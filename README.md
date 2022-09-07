@@ -7,7 +7,20 @@ App created as part of the [Individual Software Process](https://cpske.github.io
 
 ## Install and Run
 
-to be added.
+- Install Django by run the following command:
+```
+pip install django
+```
+- Start the server by:
+```
+py manage.py runserver
+```
+- Go to http://127.0.0.1:8000/polls/ to see poll questions.
+- Note: In case you want to use another port.
+```
+py manage.py runserver 1234
+```
+- Then go to http://127.0.0.1:1234/polls/
 
 ## Project Documents
 
