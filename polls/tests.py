@@ -1,15 +1,18 @@
 import datetime
-from django.test import TestCase
 from django.utils import timezone
+from django.test import TestCase
 from django.urls import reverse
 from .models import Question
 
 # Create your tests here.
 
 class QuestionModelTests(TestCase):
+    """
+    Create test cases of methods of Question model.
+    """
     def test_was_published_recently_with_future_question(self):
         """
-        A was_published_recently() returns False for quesiton 
+        was_published_recently() returns False for quesiton 
         whose pub_date is in the future.      
         """
         time = timezone.now() + datetime.timedelta(days=30)
@@ -18,7 +21,7 @@ class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_old_question(self):
         """
-        A was_published_recently() returns False for question
+        was_published_recently() returns False for question
         whose pub_date is older than 1 day. 
         """
         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
@@ -27,7 +30,7 @@ class QuestionModelTests(TestCase):
 
     def test_was_published_recently_with_recent_question(self):
         """
-        A was_published_recently() returns True for question
+        was_published_recently() returns True for question
         whose pub_date is within the last day.
         """
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
@@ -46,6 +49,9 @@ def create_question(question_text, days):
 
 
 class QuestionIndexViewTests(TestCase):
+    """
+    Create test cases of Question index view.
+    """
     def test_no_questions(self):
         """
         If no questions exist, an appropriate message is displayed.
@@ -104,6 +110,9 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionDetailViewTests(TestCase):
+    """
+    Create test cases of Question detail view.
+    """
     def test_future_question(self):
         """
         The detail view of a question with a pub_date in the future
