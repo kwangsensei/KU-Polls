@@ -7,20 +7,23 @@
             h2 {
             background: white; 
             }
+            ul.no-bullets {
+            list-style-type: none;
+            }
         </style>
     </head>
     <body>
         {% if latest_question_list %}
-            <ul>
-            {% for question in latest_question_list %}
+            <ul class="no-bullets">
+                {% for question in latest_question_list %}
                 <li>
                     <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
                     <h2><a href="{% url 'polls:results' question.id %}"><button type="button">See results</button></a></h2>
                 </li>
-            {% endfor %}
+                {% endfor %}
             </ul>
         {% else %}
-            <p>No polls are available.</p>
+        <p>No polls are available.</p>
         {% endif %}
     </body>
 </html>
