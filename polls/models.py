@@ -21,7 +21,7 @@ class Question(models.Model):
 
     def is_published(self):
         """
-        is_published() returns True if current date is on or after question’s publication date.
+        is_published() returns True if current date is on or after question's publication date.
         """
         now = timezone.now()
         return now >= self.pub_date
