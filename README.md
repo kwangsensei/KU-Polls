@@ -16,7 +16,7 @@ pip install django
 py manage.py runserver
 ```
 - Go to http://127.0.0.1:8000/polls/ to see poll questions.
-- Note: In case you want to use another port.
+- Note: In case you want to use another port. e.g.:
 ```
 py manage.py runserver 1234
 ```
