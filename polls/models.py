@@ -6,12 +6,12 @@ from django.utils import timezone
 
 class Question(models.Model):
     """
-    Question class create Question model that has
+    Question class create a Question model that has
     a question text, publication date and ending date.
     """
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
-    end_date = models.DateTimeField("ending date", null=True)
+    end_date = models.DateTimeField("date ending", null=True)
     def was_published_recently(self):
         """
         was_published_recently() returns True if wohse question was published recently (older than 1 day).
@@ -41,7 +41,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     """
-    Choice class create Choice model that has choice text and a vote tally. 
+    Choice class create a Choice model that has choice text and a vote tally. 
     Each Choice is associated with a Question.
     """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
