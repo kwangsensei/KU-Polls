@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.utils import timezone
@@ -65,6 +66,7 @@ class ResultsView(generic.DetailView):
     template_name = "polls/results.html"
 
 
+@login_required
 def vote(request, question_id):
     """
     Get voted choice from the visitors and redirect them to polls results view.
@@ -72,6 +74,9 @@ def vote(request, question_id):
     of that poll and display the error message.
     """
     question = get_object_or_404(Question, pk=question_id)
+    user = request.user
+    if not user.is_authenticated:
+        return redirect("login")
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
