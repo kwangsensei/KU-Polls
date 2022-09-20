@@ -1,3 +1,4 @@
+from secrets import choice
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -5,7 +6,7 @@ from django.contrib import messages
 from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 
 # Create your views here.
 
@@ -18,6 +19,7 @@ class IndexView(generic.ListView):
     """
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
+
     def get_queryset(self):
         """
         Return the last five published questions (not including those set to be
@@ -37,6 +39,7 @@ class DetailView(generic.DetailView):
     """
     model = Question
     template_name = "polls/detail.html"
+
     def get_queryset(self):
         """Excludes any questions that aren't published yet."""
         return Question.objects.filter(pub_date__lte=timezone.now())
@@ -86,8 +89,15 @@ def vote(request, question_id):
             "error_message": "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        # Try to get previous voted.
+        try:
+            prev_vote = Vote.objects.get(user=user, choice__in=question.choice_set.all())
+            prev_vote.choice = selected_choice
+            prev_vote.save()
+        # If there is no previous vote.
+        except Vote.DoesNotExist:
+            prev_vote = Vote.objects.create(user=user, choice=selected_choice)
+            prev_vote.save()
         # Always return an HttpResponseRedirect after succesfully dealing with POST data.
         # This prevents data from being posted twice if a user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))

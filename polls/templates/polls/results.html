@@ -4,10 +4,24 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'polls/style.css' %}">
         <style>
-            
+            .align-right {
+            text-align: right;
+            border: 0;
+            }
         </style>
     </head>
     <body>
+        <div class="top">
+            <span>
+                <div class="align-right">
+                    {% if user.is_authenticated %}
+                    {{ user.username }} <a href="/accounts/logout/"><button type="button">Logout</button></a>
+                    {% else %}
+                    <a href="/accounts/login/"><button type="button">Login</button></a>
+                    {% endif %}
+                </div>
+            </span>
+        </div>
         <h1>{{ question.question_text }}</h1>
         <ul>
             {% for choice in question.choice_set.all %}
