@@ -22,6 +22,15 @@ py manage.py runserver 1234
 ```
 - Then go to http://127.0.0.1:1234/polls/
 
+## Demo
+
+- Accounts using for demo.
+
+|    Username    |       Password      |
+|----------------|---------------------|
+|   ku_nisit_1   | ku_nisit_1_password |
+|   ku_nisit_2   | ku_nisit_2_password |
+
 ## Project Documents
 
 All project documents are in the [Project Wiki](../../wiki/Home).
@@ -31,3 +40,4 @@ All project documents are in the [Project Wiki](../../wiki/Home).
 - [Project Plan](../../wiki/Project%20Plan)
 - [Iteration 1 Plan](../../wiki/Iteration%201%20Plan) and [Task Board](https://github.com/users/KwangSensei/projects/1/views/16)
 - [Iteration 2 Plan](../../wiki/Iteration%202%20Plan) and [Task Board](https://github.com/users/KwangSensei/projects/1/views/13)
+- [Iteration 3 Plan](../../wiki/Iteration%203%20Plan) and [Task Board](https://github.com/users/KwangSensei/projects/1/views/18)
