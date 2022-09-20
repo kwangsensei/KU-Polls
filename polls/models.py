@@ -65,4 +65,3 @@ class Vote(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-    

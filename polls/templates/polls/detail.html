@@ -28,15 +28,23 @@
                 <legend>
                     <h1>{{ question.question_text }}</h1>
                 </legend>
-                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                {% if error_message %}
+                <p>
+                    <strong>{{ error_message }}</strong>
+                </p>
+                {% endif %}
                 {% for choice in question.choice_set.all %}
                 <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
                 {% endfor %}
             </fieldset>
-            <a href="{% url 'polls:index' %}"><button type="button">Back to List of Polls</button></a>
-            <a href="{% url 'polls:results' question.id %}"><button type="button">See results</button></a>
-            <input type="submit" value="Vote"> 
+            <a href="{% url 'polls:index' %}"><button type="button">Back to list of polls</button></a>
+            <input type="submit" value="Vote">
+            <span>
+                <div class="align-right">
+                    <a href="{% url 'polls:results' question.id %}"><button type="button">See results</button></a>
+                </div>
+            </span>
         </form>
     </body>
 </html>
