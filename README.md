@@ -1,35 +1,46 @@
-## Online Polls And Surveys
+## Online Polls And Surveys For KU
 
 An application for conducting online polls and surveys based 
 on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro/tutorial01/), with additional features.
 
 App created as part of the [Individual Software Process](https://cpske.github.io/ISP) course at Kasetsart University.
 
-## Install and Run
+## How To Install
 
-- Install Django by run the following command:
-```
-pip install django
-```
-- Start the server by:
-```
-py manage.py runserver
-```
-- Go to http://127.0.0.1:8000/polls/ to see poll questions.
-- Note: In case you want to use another port. e.g.:
-```
-py manage.py runserver 1234
-```
-- Then go to http://127.0.0.1:1234/polls/
+1. ```Python 3.9``` or higher is required.
 
-## Demo
+2. Clone this github repository. Or run this command:
+```
+git clone https://github.com/KwangSensei/ku-polls.git
+```
 
-- Accounts using for demo.
+3. Locate the file directory.
 
-|    Username    |       Password      |
-|----------------|---------------------|
-|   ku_nisit_1   | ku_nisit_1_password |
-|   ku_nisit_2   | ku_nisit_2_password |
+4. Change filename ```sample.env``` to ```.env``` and do as the instruction say.
+
+5. Run command below to create virtual environment.
+```
+# create the virtual env in "env/", only 1 time
+python -m venv env
+
+# start the virtual env in bash or zsh
+. env/bin/activate
+```
+
+6. Run command below to install required packages.
+```
+pip install -r requirements.txt
+```
+## Running App
+
+1. Start the server by run:
+```
+python manage.py runserver
+```
+
+2. Then follow the link ```http://localhost:8000```
+
+- *Note: You can create new users, questions and choices in /admin page.*
 
 ## Project Documents
 
