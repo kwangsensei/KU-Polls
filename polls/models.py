@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Question(models.Model):
     """
     Question class create a Question model that has
@@ -43,7 +44,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     """
-    Choice class create a Choice model that has choice text and a vote tally. 
+    Choice class create a Choice model that has choice text and a vote tally.
     Each Choice is associated with a Question.
     """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -59,7 +60,7 @@ class Choice(models.Model):
 
 class Vote(models.Model):
     """
-    Vote class create a vote model that refer user and choice for 
+    Vote class create a vote model that refer user and choice for
     tracking and store who has already voted for each poll.
     Only authenticated user allow to 1 vote per poll.
     """

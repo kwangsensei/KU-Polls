@@ -1,2 +1,2 @@
-1. Django >= 4.1.1
-2. python-decouple
+django >= 4.1.1
+python-decouple >= 3.6

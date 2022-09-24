@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY", default="missing-secret-key", cast=str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Set DEBUG to True for testing, False for actual use.
-DEBUG = config("DEBUG", default=False, cast=bool)
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -74,7 +74,7 @@ TEMPLATES = [
 # Enable authentication backend to authenticate users.
 
 AUTHENTICATION_BACKENDS = [
-   'django.contrib.auth.backends.ModelBackend',  
+   'django.contrib.auth.backends.ModelBackend',
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'

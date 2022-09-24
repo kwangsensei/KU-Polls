@@ -1,0 +1,60 @@
+[
+    {
+        "model": "polls.question",
+        "pk": 4,
+        "fields": {
+            "question_text": "What is your favorite computer OS?",
+            "pub_date": "2022-09-06T09:30:55.093Z",
+            "end_date": null
+        }
+    },
+    {
+        "model": "polls.question",
+        "pk": 5,
+        "fields": {
+            "question_text": "What would you prefer to wear when come to study at KU? Student uniform or casual wear?",
+            "pub_date": "2022-09-06T09:39:06.610Z",
+            "end_date": null
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 9,
+        "fields": {
+            "question": 4,
+            "choice_text": "Windows"
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 10,
+        "fields": {
+            "question": 4,
+            "choice_text": "macOS"
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 11,
+        "fields": {
+            "question": 4,
+            "choice_text": "Linux"
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 15,
+        "fields": {
+            "question": 5,
+            "choice_text": "I prefer student uniform."
+        }
+    },
+    {
+        "model": "polls.choice",
+        "pk": 16,
+        "fields": {
+            "question": 5,
+            "choice_text": "I prefer casual wear."
+        }
+    }
+]
