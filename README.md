@@ -9,7 +9,7 @@ App created as part of the [Individual Software Process](https://cpske.github.io
 
 1. ```Python 3.9``` or higher is required.
 
-2. Clone this github repository. Or run this command:
+2. Clone this GitHub repository. Or run this command:
 ```
 git clone https://github.com/KwangSensei/ku-polls.git
 ```
