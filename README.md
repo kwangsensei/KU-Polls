@@ -16,7 +16,7 @@ git clone https://github.com/KwangSensei/ku-polls.git
 
 3. Locate the file directory.
 
-4. Change filename ```sample.env``` to ```.env``` and do as the instruction say.
+4. Change filename ```sample.env``` to ```.env``` and adjust values as the instruction say.
 
 5. Run command below to create virtual environment.
 ```
@@ -24,21 +24,43 @@ git clone https://github.com/KwangSensei/ku-polls.git
 python -m venv env
 
 # start the virtual env in bash or zsh
-. env/bin/activate
+. env\Scripts\activate
 ```
 
 6. Run command below to install required packages.
 ```
 pip install -r requirements.txt
 ```
-## Running App
+## Running The App
 
-1. Start the server by run:
+1. Run migrations by fellow command:
+```
+python manage.py migrate
+```
+
+2. If you wish to use data from data fixtures, please run command:
+```
+python manage.py loaddata polls\data_fixtures\polls.json
+```
+
+3. Start the server by run:
 ```
 python manage.py runserver
 ```
 
-2. Then follow the link ```http://localhost:8000```
+4. Then follow the link ```http://localhost:8000``` to web application.
+
+5. To create ```admin``` account:
+```
+python manage.py createsuperuser
+
+# enter your username, email, password and password confirmation, in this case
+Username: admin
+Email address: admin@example.com
+Password: **********
+Password (again): *********
+Superuser created successfully.
+```
 
 - *Note: You can create new users, questions and choices in /admin page.*
 
