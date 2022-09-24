@@ -1,4 +1,3 @@
-from secrets import choice
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -10,9 +9,10 @@ from .models import Question, Choice, Vote
 
 # Create your views here.
 
+
 class IndexView(generic.ListView):
     """
-    Create Django's generic view of index page. 
+    Create Django's generic view of index page.
     Using template polls/index.html.
     ListView use to display a list of objects.
     Returns a list of questions.

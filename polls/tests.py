@@ -6,14 +6,15 @@ from .models import Question
 
 # Create your tests here.
 
+
 class QuestionModelTests(TestCase):
     """
     Create test cases of methods of Question model.
     """
     def test_was_published_recently_with_future_question(self):
         """
-        was_published_recently() returns False for quesiton 
-        whose pub_date is in the future.      
+        was_published_recently() returns False for quesiton
+        whose pub_date is in the future.
         """
         time = timezone.now() + datetime.timedelta(days=30)
         future_question = Question(pub_date=time)
@@ -22,7 +23,7 @@ class QuestionModelTests(TestCase):
     def test_was_published_recently_with_old_question(self):
         """
         was_published_recently() returns False for question
-        whose pub_date is older than 1 day. 
+        whose pub_date is older than 1 day.
         """
         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
         old_question = Question(pub_date=time)
@@ -39,8 +40,8 @@ class QuestionModelTests(TestCase):
 
     def test_is_published_with_future_question(self):
         """
-        is_published() returns False for quesiton 
-        whose pub_date is in the future.      
+        is_published() returns False for quesiton
+        whose pub_date is in the future.
         """
         time = timezone.now() + datetime.timedelta(days=30)
         future_question = Question(pub_date=time)
@@ -49,7 +50,7 @@ class QuestionModelTests(TestCase):
     def test_is_published_recently_with_old_question(self):
         """
         is_published() returns True for question
-        whose pub_date is older than 1 day. 
+        whose pub_date is older than 1 day.
         """
         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
         old_question = Question(pub_date=time)
