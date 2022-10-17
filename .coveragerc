@@ -10,3 +10,6 @@ omit =
 
         # Migrations
         */migrations/*
+	*/tests.py
+	*/admin.py
+	*/apps.py
