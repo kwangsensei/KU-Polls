@@ -17,14 +17,16 @@ class Question(models.Model):
 
     def was_published_recently(self):
         """
-        was_published_recently() returns True if wohse question was published recently (older than 1 day).
+        was_published_recently() returns True
+        if whose question was published recently (older than 1 day).
         """
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
     def is_published(self):
         """
-        is_published() returns True if current date is on or after question's publication date.
+        is_published() returns True
+        if current date is on or after question's publication date.
         """
         now = timezone.now()
         return now >= self.pub_date
@@ -35,7 +37,7 @@ class Question(models.Model):
         """
         now = timezone.now()
         if self.end_date:
-            return self.pub_date <= now <= self.end_date
+            return self.pub_date <= now < self.end_date
         return self.is_published()
 
     def __str__(self):

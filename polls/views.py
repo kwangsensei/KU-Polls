@@ -91,13 +91,21 @@ def vote(request, question_id):
     else:
         # Try to get previous voted.
         try:
-            prev_vote = Vote.objects.get(user=user, choice__in=question.choice_set.all())
+            prev_vote = Vote.objects.get(
+                user=user, choice__in=question.choice_set.all()
+                )
             prev_vote.choice = selected_choice
             prev_vote.save()
         # If there is no previous vote.
         except Vote.DoesNotExist:
-            prev_vote = Vote.objects.create(user=user, choice=selected_choice)
+            prev_vote = Vote.objects.create(
+                user=user, choice=selected_choice
+                )
             prev_vote.save()
-        # Always return an HttpResponseRedirect after succesfully dealing with POST data.
-        # This prevents data from being posted twice if a user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        # Always return an HttpResponseRedirect
+        # after succesfully dealing with POST data.
+        # This prevents data from being posted twice
+        # if a user hits the Back button.
+        return HttpResponseRedirect(
+            reverse("polls:results", args=(question.id,))
+            )
