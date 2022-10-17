@@ -3,13 +3,10 @@
 branch = True
 # omit uninteresting files
 omit =
-        __init__.py
+        */__init__.py
 
         # Root app directory
         mysite/*
 
         # Migrations
         */migrations/*
-	*/tests.py
-	*/admin.py
-	*/apps.py
