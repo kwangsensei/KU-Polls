@@ -37,7 +37,7 @@ class Question(models.Model):
         """
         now = timezone.now()
         if self.end_date:
-            return self.pub_date <= now <= self.end_date
+            return self.pub_date <= now < self.end_date
         return self.is_published()
 
     def __str__(self):

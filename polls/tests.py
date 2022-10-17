@@ -87,13 +87,13 @@ class QuestionModelTests(TestCase):
 
     def test_can_vote_on_ending_date(self):
         """
-        can_vote() returns True if current date/time is exactly the
+        can_vote() returns False if current date/time is exactly the
         question end_date.
         """
         start_time = timezone.now() - datetime.timedelta(days=1, seconds=1)
         end_time = timezone.now()
         ending_question = Question(pub_date=start_time, end_date=end_time)
-        self.assertIs(ending_question.can_vote(), True)
+        self.assertIs(ending_question.can_vote(), False)
 
     def test_can_vote_after_ending_date(self):
         """
