@@ -23,7 +23,9 @@ jobs:
         pip install flake8
     - name: Lint with flake8
       run: |
-        flake8 --count .
+        flake8 --count ./polls/models.py
+        flake8 --count ./polls/urls.py
+        flake8 --count ./polls/views.py
     - name: Run Tests
       run: |
         coverage run manage.py test polls
