@@ -31,3 +31,7 @@ jobs:
         coverage run manage.py test polls
     - name: Upload to Codecov
       uses: codecov/codecov-action@v3
+      run: |
+        $ProgressPreference = 'SilentlyContinue'
+        Invoke-WebRequest -Uri https://uploader.codecov.io/latest/windows/codecov.exe -Outfile codecov.exe
+        .\codecov.exe
