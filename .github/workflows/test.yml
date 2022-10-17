@@ -29,3 +29,5 @@ jobs:
     - name: Run Tests
       run: |
         coverage run manage.py test polls
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v3
