@@ -6,7 +6,7 @@ omit =
         */__init__.py
 
         # Root app directory
-        mysite/*
+        */mysite/*
 
         # Migrations
         polls/migrations/*
