@@ -9,4 +9,4 @@ omit =
         mysite/*
 
         # Migrations
-        */migrations/*
+        polls/migrations/*
