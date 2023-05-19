@@ -12,8 +12,14 @@ class Question(models.Model):
     a question text, publication date and ending date.
     """
     question_text = models.CharField(max_length=200)
+    # automatically set pub_date to today's date (auto_now)
     pub_date = models.DateTimeField("date published")
     end_date = models.DateTimeField("date ending", null=True)
+
+    @property
+    def total_votes(self) -> int:
+        """Total number of votes for this poll."""
+        return sum(choice.votes for choice in self.choice_set.all())
 
     def was_published_recently(self):
         """
@@ -22,6 +28,10 @@ class Question(models.Model):
         """
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    was_published_recently.boolean = True
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.short_description = 'Published recently?'
 
     def is_published(self):
         """
@@ -33,7 +43,9 @@ class Question(models.Model):
 
     def can_vote(self):
         """
-        can_vote() returns True if voting is allowed for this question.
+        Test if voting is allowed for this poll question.
+
+        :return: True if voting is allowed, False if not.
         """
         now = timezone.now()
         if self.end_date:
@@ -68,3 +80,6 @@ class Vote(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Vote for "{self.choice.choice_text}" by {self.user.username}'

@@ -1,0 +1,51 @@
+<html lang="en">
+    <head>
+        {% block title %}
+        <title>
+            KU Polls
+        </title>
+        {% endblock %}
+        <meta charset="utf-8"/>
+        <style>
+            th, td {
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+            li a {
+                color: blue;
+            }
+            h1, h2 {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: large;
+            }
+            .small {
+                font-size: small;
+            }
+            /* classes used by Django messages framework */
+            .info {
+                color: blue;
+            }
+            .error {
+                color: red;
+            }
+            .warning, .warn {
+                color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        {% block header %}
+        {% endblock %}
+        <!-- Django messages are shown after the header -->
+        {% if messages %}
+        {% for msg in messages %}
+            <p class="{{ msg.tags }}">
+                {{ msg }}
+            </p>
+        {% endfor %}
+        {% endif %}
+        {% block content %}
+        <!-- content of the page goes here -->
+        {% endblock %}
+    </body>
+</html>

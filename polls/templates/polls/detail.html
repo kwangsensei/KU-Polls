@@ -1,50 +1,35 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
-        <style>
-            .align-right {
-            text-align: right;
-            border: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="top">
-            <span>
-                <div class="align-right">
-                    {% if user.is_authenticated %}
-                    {{ user.username }} <a href="/accounts/logout/"><button type="button">Logout</button></a>
-                    {% else %}
-                    <a href="/accounts/login/"><button type="button">Login</button></a>
-                    {% endif %}
-                </div>
-            </span>
-        </div>
-        <form action="{% url 'polls:vote' question.id %}" method="post">
-            {% csrf_token %}
-            <fieldset>
-                <legend>
-                    <h1>{{ question.question_text }}</h1>
-                </legend>
-                {% if error_message %}
-                <p>
-                    <strong>{{ error_message }}</strong>
-                </p>
-                {% endif %}
-                {% for choice in question.choice_set.all %}
-                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-                {% endfor %}
-            </fieldset>
-            <a href="{% url 'polls:index' %}"><button type="button">Back to list of polls</button></a>
-            <input type="submit" value="Vote">
-            <span>
-                <div class="align-right">
-                    <a href="{% url 'polls:results' question.id %}"><button type="button">See results</button></a>
-                </div>
-            </span>
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block header %}
+<h1>
+    {{ question.question_text }}
+</h1>
+{% endblock %}
+{% block content %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all | dictsort: "choice_text" %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" {% if choice == selected_choice %} checked {% endif %}/>
+        <label for="choice{{ forloop.counter }}">
+            {{ choice.choice_text }}
+        </label>
+        <br>
+    {% endfor %}
+    &emsp;<br/>
+    {% if user.is_authenticated %}
+    <input type="submit" value="Vote">
+    {% if selected_choice %}
+    <a href="{% url 'polls:remove' question.id %}">
+        Remove my vote
+    </a>
+    {% endif %}
+    {% else %}
+    Please <a href="{% url 'login' %}?next={{request.path}}">
+        Login
+    </a> 
+     to vote.
+    {% endif %}
+</form>
+<p>
+<a href="{% url 'polls:index' %}">Back to List of Polls</a>
+</p>
+{% endblock %}
