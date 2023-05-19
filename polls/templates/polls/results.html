@@ -1,37 +1,34 @@
-{% extends 'base.html' %}
-{% block header %}
-<h2>
-    {{ question.question_text }}
-</h2>
-{% endblock %}
-{% block content %}
-<p>
-    <table border="0" align="left" style="padding:2ex;">
-        <tr>
-            <th align="left">
-                Choice
-            </th>
-            <th>
-                Votes
-            </th>
-        </tr>
-        {% for choice in question.choice_set.all | dictsort: "choice_text" %}
-        <tr valign="top">
-            <td>
-                {{ choice.choice_text }}
-            </td>
-            <td align="center">
-                {{ choice.votes }}
-            </td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td colspan="2">
-                <a href="{% url 'polls:index' %}">
-                    Back to List of Polls
-                </a>
-            </td>
-        </tr>
-    </table>
-</p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+        <style>
+            .align-right {
+            text-align: right;
+            border: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top">
+            <span>
+                <div class="align-right">
+                    {% if user.is_authenticated %}
+                    {{ user.username }} <a href="/accounts/logout/"><button type="button">Logout</button></a>
+                    {% else %}
+                    <a href="/accounts/login/"><button type="button">Login</button></a>
+                    {% endif %}
+                </div>
+            </span>
+        </div>
+        <h1>{{ question.question_text }}</h1>
+        <ul>
+            {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'polls:detail' question.id %}"><button type="button">Back to question</button></a>
+        <a href="{% url 'polls:index' %}"><button type="button">Back to list of polls</button></a>
+    </body>
+</html>
