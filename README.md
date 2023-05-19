@@ -1,6 +1,6 @@
 ## Online Polls And Surveys For KU
 
-![Unit Test](https://github.com/KwangSensei/ku-polls/actions/workflows/test.yml/badge.svg) 
+![Unittest](https://github.com/KwangSensei/ku-polls/actions/workflows/test.yml/badge.svg) 
 [![codecov](https://codecov.io/gh/KwangSensei/ku-polls/branch/master/graph/badge.svg?token=F5JIA3HDYY)](https://codecov.io/gh/KwangSensei/ku-polls)
 
 An application for conducting online polls and surveys based 
@@ -14,7 +14,7 @@ App created as part of the [Individual Software Process](https://cpske.github.io
 
 2. Clone this GitHub repository. Or run this command:
 ```
-git clone https://github.com/kwangsensei/KU-Polls.git
+git clone https://github.com/KwangSensei/ku-polls.git
 ```
 
 3. Locate the file directory.
