@@ -1,11 +1,13 @@
-from django.shortcuts import  render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from .models import Question, Choice, Vote
-from django.http import HttpRequest, HttpResponseRedirect, HttpResponseNotAllowed, HttpResponseNotFound
+from django.http import HttpRequest
+from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotAllowed
 
 # Create your views here.
 
@@ -29,7 +31,8 @@ class IndexView(generic.ListView):
         #     pub_date__lte=timezone.now()
         # ).order_by('-pub_date')[:5]
         return [
-            q for q in Question.objects.all().order_by('question_text') if q.is_published()
+            q for q in Question.objects.all().order_by('question_text') 
+            if q.is_published()
         ]
 
 
@@ -49,8 +52,9 @@ class DetailView(generic.DetailView):
 
     # def redirect_when_vote_false(self, request, question_id):
     #     """
-    #     Redirect the visitors to back polls index view when visitors navigates
-    #     to a poll detail view when voting is not more allowed.
+    #     Redirect the visitors to back polls index view
+    #     when visitors navigatesto a poll detail view
+    #     when voting is not more allowed.
     #     """
     #     question = get_object_or_404(Question, pk=question_id)
     #     if not question.can_vote():
@@ -70,7 +74,8 @@ class DetailView(generic.DetailView):
             choice = vote.choice if vote and vote.choice else None
         else:
             choice = None
-        # pass the question and user's choice to the template as named variables
+        # pass the question and user's choice to the template 
+        # as named variables
         context = {
             "question": question,
             "selected_choice": choice
@@ -97,7 +102,7 @@ def vote(request: HttpRequest, question_id):
         "question": question,
     }
     if not question.can_vote():
-        messages.error(request, "Voting not allowed for this question")  
+        messages.error(request, "Voting not allowed for this question")
         return render(request, 'polls/detail.html', context_data)
     if request.method != 'POST':
         # this view accepts only POST
@@ -122,7 +127,7 @@ def vote(request: HttpRequest, question_id):
 def get_vote_for_user(question: Question, user) -> Vote:
     """
     Return the vote by the user for a specific poll question.
-    
+
     :param question: a Question to get user's vote for
     :param user: the User whose vote to find and return
     :returns: an existing vote for the user, or None if no vote for this question.
@@ -143,9 +148,14 @@ def remove_vote(request, question_id):
     :return: redirect to the same question page.
     """
     try:
-        selected_choice = Vote.objects.get(user=request.user, choice__question=question_id)
+        selected_choice = Vote.objects.get(
+            user=request.user,
+            choice__question=question_id,
+        )
         selected_choice.delete()
         messages.info(request, "Your vote was successfully removed.")
     except Vote.DoesNotExist:
         messages.info(request, "Unsuccessful remove the vote.")
-    return HttpResponseRedirect(reverse('polls:detail', args=(question_id,)))
+    return HttpResponseRedirect(
+        reverse('polls:detail', args=(question_id,))
+    )
