@@ -9,27 +9,25 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import os.path
+import os
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Create a secret key, default is "missing-secret-key."
-SECRET_KEY = config("SECRET_KEY", default="missing-secret-key", cast=str)
+SECRET_KEY = config("SECRET_KEY", default="missing-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Set DEBUG to True for testing, False for actual use.
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', default='localhost, 127.0.0.1,testserver', cast=Csv()
+)
 
 # Application definition
 
@@ -79,12 +77,6 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Specific default redirect page after login and log out.
-
-LOGIN_REDIRECT_URL = "/polls/"
-
-LOGOUT_REDIRECT_URL = "/"
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -95,6 +87,9 @@ DATABASES = {
     }
 }
 
+LOGIN_REDIRECT_URL = "/polls/"
+
+LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

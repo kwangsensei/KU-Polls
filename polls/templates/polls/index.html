@@ -1,52 +1,53 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'polls/style.css' %}">
-        <style>
-            ul.no-bullets {
-            list-style-type: none;
-            }
-            .align-right {
-            text-align: right;
-            border: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="top">
-                <span>
-                    <div class="align-right">
-                        {% if user.is_authenticated %}
-                        {{ user.username }} <a href="/accounts/logout/"><button type="button">Logout</button></a>
-                        {% else %}
-                        <a href="/accounts/login/"><button type="button">Login</button></a>
-                        {% endif %}
-                    </div>
-                </span>
-                <h1>Kasetsart University Polls</h1>
-            </div>
-            <br>
-            Lastest Polls
-            {% if latest_question_list %}
-            <ul class="no-bullets">
-                {% for question in latest_question_list %}
-                <li>
-                    {% if question.can_vote %}
-                    <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a> 
-                    {% endif %}
-                    <br>
-                    <br>
-                    <a href="{% url 'polls:results' question.id %}"><button type="button">See results</button></a>
-                    <br>
-                    <br>
-                </li>
-                {% endfor %}
-            </ul>
+{% extends "base.html" %}
+{% block header %}
+{% if user.is_authenticated %}
+<p class="small">
+    Hello, {{user.username.title}}.&emsp;
+    <a href="{% url 'logout' %}">
+        Logout
+    </a>
+</p> 
+{% else %}
+<p>
+    Please 
+    <a href="{% url 'login' %}">
+        Login
+    </a> 
+    to vote.
+</p>
+{% endif %}
+<h2>
+    Available Polls
+</h2>
+{% endblock %}
+{% block content %}
+{% if question_list %}
+<table class="table">
+    {% for question in question_list %}
+    <tr>
+        <td>
+            {{ question.question_text }}
+        </td>
+        <td>
+            {% if question.can_vote %}
+            <a href="{% url 'polls:detail' question.id %}">
+                vote
+            </a>
             {% else %}
-            <p>No polls are available.</p>
+            voting closed
             {% endif %}
-        </div>
-    </body>
-</html>
+        </td>
+        <td>
+            <a href="{% url 'polls:results' question.id %}">
+                results
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>
+    No polls are available.
+</p>
+{% endif %}
+{% endblock %}
