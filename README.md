@@ -1,7 +1,7 @@
 ## Online Polls And Surveys For KU
 
-![Unit Test](https://github.com/KwangSensei/ku-polls/actions/workflows/test.yml/badge.svg) 
-[![codecov](https://codecov.io/gh/KwangSensei/ku-polls/branch/master/graph/badge.svg?token=F5JIA3HDYY)](https://codecov.io/gh/KwangSensei/ku-polls)
+![Unit Test](https://github.com/kwangsensei/KU-Polls/actions/workflows/test.yml/badge.svg) 
+[![codecov](https://codecov.io/gh/kwangsensei/ku-polls/branch/master/graph/badge.svg?token=F5JIA3HDYY)](https://codecov.io/gh/kwangsensei/KU-Polls)
 
 An application for conducting online polls and surveys based 
 on the [Django Tutorial project](https://docs.djangoproject.com/en/4.1/intro/tutorial01/), with additional features.
