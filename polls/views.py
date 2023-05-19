@@ -130,7 +130,7 @@ def get_vote_for_user(question: Question, user) -> Vote:
 
     :param question:    A Question to get user's vote for.
     :param user:        The User whose vote to find and return.
-    :returns:           An existing vote for the user, or None
+    :returns:           An existing vote for the user, or None 
                         if no vote for this question.
     """
     if not user.is_authenticated:
