@@ -31,7 +31,7 @@ class IndexView(generic.ListView):
         #     pub_date__lte=timezone.now()
         # ).order_by('-pub_date')[:5]
         return [
-            q for q in Question.objects.all().order_by('question_text') 
+            q for q in Question.objects.all().order_by('question_text')
             if q.is_published()
         ]
 
@@ -74,7 +74,7 @@ class DetailView(generic.DetailView):
             choice = vote.choice if vote and vote.choice else None
         else:
             choice = None
-        # pass the question and user's choice to the template 
+        # pass the question and user's choice to the template
         # as named variables
         context = {
             "question": question,
@@ -128,9 +128,10 @@ def get_vote_for_user(question: Question, user) -> Vote:
     """
     Return the vote by the user for a specific poll question.
 
-    :param question: a Question to get user's vote for
-    :param user: the User whose vote to find and return
-    :returns: an existing vote for the user, or None if no vote for this question.
+    :param question:    A Question to get user's vote for.
+    :param user:        The User whose vote to find and return.
+    :returns:           An existing vote for the user, or None 
+                        if no vote for this question.
     """
     if not user.is_authenticated:
         return None
@@ -145,7 +146,7 @@ def remove_vote(request, question_id):
     """
     Remove the vote by the user.
 
-    :return: redirect to the same question page.
+    :return: Redirect to the same question page.
     """
     try:
         selected_choice = Vote.objects.get(
